@@ -5,6 +5,7 @@
   "type": "module",
   "description": "Offline-first emergency dispatch strategy game",
   "scripts": {
+    "build": "npm run setup-assets",
     "setup-assets": "node scripts/fetch-assets.js",
     "serve": "npx http-server www -p 8080 -c-1",
     "test": "node --test"
