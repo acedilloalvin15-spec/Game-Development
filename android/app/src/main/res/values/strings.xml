@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Dispatch Operator</string>
+    <string name="title_activity_main">Dispatch Operator</string>
+    <string name="package_name">com.dispatch.operator911</string>
+    <string name="custom_url_scheme">com.dispatch.operator911</string>
+</resources>

@@ -1,0 +1,9 @@
+{
+  "name": "Dispatch Operator",
+  "short_name": "Dispatch",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0b1014",
+  "theme_color": "#0b1014",
+  "description": "Offline emergency dispatch strategy simulation"
+}

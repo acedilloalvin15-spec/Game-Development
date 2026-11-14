@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#0b1014">
+    <meta name="description" content="An offline emergency dispatch strategy simulation.">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="styles.css">
+    <title>Dispatch Operator</title>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div class="brand"><span class="brand-mark">911</span><div><strong>DISPATCH</strong><small>METRO OPERATIONS</small></div></div>
+        <div class="status"><span class="live-dot"></span><span id="clock">08:00</span><span class="status-label">SHIFT ACTIVE</span></div>
+      </header>
+      <section class="dashboard">
+        <section class="map-panel panel" aria-label="City dispatch map">
+          <div class="panel-heading"><div><span class="eyebrow">CITY GRID</span><h1 id="city-name">New Carthage</h1></div><button id="city-select" class="quiet-button">CHANGE CITY <span>⌄</span></button></div>
+          <div class="map-wrap"><canvas id="city-map" aria-label="Road map with active units and incidents"></canvas><div id="map-overlay" class="map-overlay"></div></div>
+          <div class="map-legend"><span><i class="legend-road"></i>ROAD NETWORK</span><span><i class="legend-unit"></i>AVAILABLE UNIT</span><span><i class="legend-call"></i>ACTIVE INCIDENT</span></div>
+        </section>
+        <aside class="right-column">
+          <section class="panel incident-panel">
+            <div class="panel-heading"><div><span class="eyebrow">INCOMING CALLS</span><h2>Incident queue <b id="incident-count">0</b></h2></div><button id="new-call" class="icon-button" aria-label="Create a call">＋</button></div>
+            <div id="incident-list" class="incident-list"></div>
+            <button id="next-call" class="primary-button">GENERATE CALL <span>＋</span></button>
+          </section>
+          <section class="panel units-panel">
+            <div class="panel-heading"><div><span class="eyebrow">FLEET STATUS</span><h2>Response units</h2></div><span id="unit-ready-count" class="count-pill">0 READY</span></div>
+            <div id="unit-list" class="unit-list"></div>
+          </section>
+        </aside>
+      </section>
+      <section class="bottom-grid">
+        <section class="panel activity-panel"><div class="panel-heading"><div><span class="eyebrow">RADIO TRAFFIC</span><h2>Operations log</h2></div><button id="clear-log" class="text-button">CLEAR</button></div><ol id="radio-log" class="radio-log" aria-live="polite"></ol></section>
+        <section class="panel shift-panel"><span class="eyebrow">SHIFT PERFORMANCE</span><div class="stats"><div><strong id="reputation">82</strong><small>REPUTATION</small></div><div><strong id="resolved">0</strong><small>RESOLVED</small></div><div><strong id="response-time">—</strong><small>AVG RESPONSE</small></div></div><div class="shift-progress"><span></span></div><div class="shift-footer"><span>DAY SHIFT</span><span>08:00 — 20:00</span></div><button id="open-scenarios" class="text-button editor-link">SCENARIO EDITOR</button></section>
+      </section>
+      <nav class="mobile-nav" aria-label="Main navigation"><button class="nav-active" data-nav="map">⌖<span>MAP</span></button><button data-nav="calls">◉<span>CALLS</span></button><button data-nav="fleet">▣<span>FLEET</span></button><button data-nav="log">≋<span>LOG</span></button></nav>
+    </main>
+    <dialog id="call-dialog" class="dialog-card"><form method="dialog"><button class="dialog-close" aria-label="Close">×</button></form><span id="call-category" class="eyebrow">INCOMING CALL</span><h2 id="call-title"></h2><p id="call-address" class="dialog-address"></p><div id="call-transcript" class="transcript"></div><div id="call-actions" class="dialog-actions"></div></dialog>
+    <dialog id="scenario-dialog" class="dialog-card scenario-dialog"><form method="dialog"><button class="dialog-close" aria-label="Close">×</button></form><span class="eyebrow">OPERATIONS TOOL</span><h2>Scenario editor</h2><p class="muted">Create a local training scenario. Custom scenarios are stored on this device.</p><label>Incident title<input id="scenario-title" maxlength="60" placeholder="e.g. Warehouse smoke report"></label><label>Agency<select id="scenario-agency"><option>POLICE</option><option>FIRE</option><option>EMS</option><option>MULTI</option></select></label><label>Caller statement<textarea id="scenario-line" maxlength="240" placeholder="Describe what the caller reports"></textarea></label><div class="dialog-actions"><button id="save-scenario" class="primary-button">SAVE SCENARIO</button><button id="export-scenarios" class="secondary-button">EXPORT</button><label class="secondary-button import-button">IMPORT<input id="import-scenarios" type="file" accept="application/json"></label></div><div id="scenario-list" class="scenario-list"></div></dialog>
+    <div id="toast" class="toast" role="status"></div>
+    <script type="module" src="js/game.js"></script>
+  </body>
+</html>
